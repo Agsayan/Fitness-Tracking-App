@@ -1,4 +1,4 @@
-
+package FitnessTrackingApp;
 
 
 import javafx.application.Application;
