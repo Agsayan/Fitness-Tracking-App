@@ -282,8 +282,8 @@ public class FitnessTrackingApp extends Application {
 
 	for (int i = 1; i < 5; i++) {
 	    progressGrid.add(new Label("Username"), 0, i);
-	    progressGrid.add(new TextField("Balanced"), 1, i);
-	    progressGrid.add(new TextField(), 2, i);
+	    progressGrid.add(new Label("Placeholder"), 1, i);
+	    progressGrid.add(new Label("Placeholder"), 2, i);
 	}
 
 	VBox userProgressLayout = new VBox(10, backButton, title, progressGrid);
@@ -351,7 +351,6 @@ public class FitnessTrackingApp extends Application {
     }
 
     public static void main(String[] args) {
-	System.out.println("Testing");
 	launch(args);
     }
 }
