@@ -301,12 +301,30 @@ public class FitnessTrackingApp extends Application {
 	backButton.setOnAction(e -> showTrainerPage());
 
 	Label passwordLabel = new Label("New Password");
-	TextField passwordField = new TextField();
+	PasswordField passwordField = new PasswordField();
+
+	Label confirmPasswordLabel = new Label("Confirm New Password");
+	PasswordField confirmPasswordField = new PasswordField();
+
+	Label errorLabel = new Label();
+	errorLabel.setStyle("-fx-text-fill: red;");
+
 	Button updateButton = new Button("Update");
+	updateButton.setOnAction(e -> {
+	    if (!passwordField.getText().equals(confirmPasswordField.getText())) {
+		errorLabel.setText("Passwords do not match.");
+	    } else {
+		errorLabel.setText("");
+		showTrainerPage(); // Proceed with updating logic here
+	    }
+	});
+
 	Button logoutButton = new Button("Log Out");
 	logoutButton.setOnAction(e -> showHomePage());
 
-	VBox profileManagementLayout = new VBox(10, backButton, title, passwordLabel, passwordField, updateButton, logoutButton);
+	VBox profileManagementLayout = new VBox(10, backButton, title, passwordLabel, passwordField, 
+		confirmPasswordLabel, confirmPasswordField, 
+		errorLabel, updateButton, logoutButton);
 	profileManagementLayout.setAlignment(Pos.CENTER);
 	profileManagementLayout.setPadding(new Insets(20));
 
