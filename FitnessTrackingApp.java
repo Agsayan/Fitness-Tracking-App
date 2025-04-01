@@ -308,7 +308,7 @@ public class FitnessTrackingApp extends Application {
 	primaryStage.setScene(profileManagementScene);
     }
 
-    //Helper method to create pages with a back button
+    // Helper method to create pages with a back button
     private VBox createPage(String pageTitle) {
 
 	StackPane backButton = createBackButton();
@@ -345,6 +345,7 @@ public class FitnessTrackingApp extends Application {
     }
 
     public static void main(String[] args) {
+	System.out.println("Testing");
 	launch(args);
     }
 }
