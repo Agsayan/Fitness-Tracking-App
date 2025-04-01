@@ -37,18 +37,10 @@ public class FitnessTrackingApp extends Application {
 	passwordField.setPromptText("Password");
 
 	Button loginEnthusiastBtn = new Button("Login as Enthusiast");
-	loginEnthusiastBtn.setOnAction(e -> {
-	    if (!usernameField.getText().isEmpty() && !passwordField.getText().isEmpty()) {
-		showEnthusiastPage();
-	    }
-	});
+	loginEnthusiastBtn.setOnAction(e -> showEnthusiastPage());
 
 	Button loginTrainerBtn = new Button("Login as Trainer");
-	loginTrainerBtn.setOnAction(e -> {
-	    if (!usernameField.getText().isEmpty() && !passwordField.getText().isEmpty()) {
-		showTrainerPage();
-	    }
-	});
+	loginTrainerBtn.setOnAction(e -> showTrainerPage());
 
 	Button createAccountBtn = new Button("Create Account");
 	createAccountBtn.setOnAction(e -> showCreateAccountPage());
@@ -58,12 +50,9 @@ public class FitnessTrackingApp extends Application {
 
 	Button adminLoginBtn = new Button("Admin Login");
 	adminLoginBtn.setVisible(false);
-	adminLoginBtn.setOnAction(e -> {
-	    if (!usernameField.getText().isEmpty() && !passwordField.getText().isEmpty()) {
-		showAdminPage();
-	    }
-	});
+	adminLoginBtn.setOnAction(e -> showAdminPage());
 
+	// Layout
 	VBox layout = new VBox(10);
 	layout.setAlignment(Pos.CENTER);
 	layout.setPadding(new Insets(20));
@@ -76,6 +65,7 @@ public class FitnessTrackingApp extends Application {
 		createAccountBtn, forgotPasswordLink, adminLoginBtn
 		);
 
+
 	logo.setOnMouseClicked(event -> {
 	    logoClickCount++;
 	    if (logoClickCount == 3) {
@@ -84,7 +74,8 @@ public class FitnessTrackingApp extends Application {
 	    }
 	});
 
-	Scene scene = new Scene(layout, 600, 800);
+	// Sets the scene size 
+	Scene scene = new Scene(layout, 600, 800); 
 	primaryStage.setScene(scene);
 	primaryStage.show();
     }
@@ -311,7 +302,12 @@ public class FitnessTrackingApp extends Application {
 
 	Button updateButton = new Button("Update");
 	updateButton.setOnAction(e -> {
-	    if (!passwordField.getText().equals(confirmPasswordField.getText())) {
+	    String password = passwordField.getText();
+	    String confirmPassword = confirmPasswordField.getText();
+
+	    if (password.isEmpty() || confirmPassword.isEmpty()) {
+		errorLabel.setText("Fields cannot be empty.");
+	    } else if (!password.equals(confirmPassword)) {
 		errorLabel.setText("Passwords do not match.");
 	    } else {
 		errorLabel.setText("");
