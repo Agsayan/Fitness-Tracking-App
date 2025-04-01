@@ -191,76 +191,76 @@ public class FitnessTrackingApp extends Application {
 
     // FITNESS TRAINER PAGES
     private void showCreateWorkoutPlanPage() {
-	    Label title = new Label("Create Workout Plan");
-	    title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-	    Button backButton = new Button("Return to Dashboard");
-	    backButton.setOnAction(e -> showTrainerPage());
+	Label title = new Label("Create Workout Plan");
+	title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+	Button backButton = new Button("Return to Dashboard");
+	backButton.setOnAction(e -> showTrainerPage());
 
-	    Label fitnessGoalLabel = new Label("Fitness Goal");
-	    ComboBox<String> fitnessGoal = new ComboBox<>();
-	    fitnessGoal.getItems().addAll("Weight Loss", "Strength Training", "Balanced");
+	Label fitnessGoalLabel = new Label("Fitness Goal");
+	ComboBox<String> fitnessGoal = new ComboBox<>();
+	fitnessGoal.getItems().addAll("Weight Loss", "Strength Training", "Balanced");
 
-	    GridPane workoutGrid = new GridPane();
-	    workoutGrid.setHgap(10);
-	    workoutGrid.setVgap(10);
-	    workoutGrid.setAlignment(Pos.CENTER);
+	GridPane workoutGrid = new GridPane();
+	workoutGrid.setHgap(10);
+	workoutGrid.setVgap(10);
+	workoutGrid.setAlignment(Pos.CENTER);
 
-	    // Adding headers
-	    workoutGrid.add(new Label("Exercise"), 0, 0);
-	    workoutGrid.add(new Label("No. of Reps"), 1, 0);
-	    workoutGrid.add(new Label("No. of Sets"), 2, 0);
+	// Adding headers
+	workoutGrid.add(new Label("Exercise"), 0, 0);
+	workoutGrid.add(new Label("No. of Reps"), 1, 0);
+	workoutGrid.add(new Label("No. of Sets"), 2, 0);
 
-	    for (int i = 1; i <= 5; i++) {
-	        workoutGrid.add(new TextField(), 0, i);
-	        workoutGrid.add(new TextField(), 1, i);
-	        workoutGrid.add(new TextField(), 2, i);
-	    }
-
-	    Button createPlanButton = new Button("Create Plan");
-
-	    VBox createWorkoutLayout = new VBox(10, backButton, title, fitnessGoalLabel, fitnessGoal, workoutGrid, createPlanButton);
-	    createWorkoutLayout.setAlignment(Pos.CENTER);
-	    createWorkoutLayout.setPadding(new Insets(20));
-
-	    Scene createWorkoutScene = new Scene(createWorkoutLayout, 600, 800);
-	    primaryStage.setScene(createWorkoutScene);
+	for (int i = 1; i <= 5; i++) {
+	    workoutGrid.add(new TextField(), 0, i);
+	    workoutGrid.add(new TextField(), 1, i);
+	    workoutGrid.add(new TextField(), 2, i);
 	}
+
+	Button createPlanButton = new Button("Create Plan");
+
+	VBox createWorkoutLayout = new VBox(10, backButton, title, fitnessGoalLabel, fitnessGoal, workoutGrid, createPlanButton);
+	createWorkoutLayout.setAlignment(Pos.CENTER);
+	createWorkoutLayout.setPadding(new Insets(20));
+
+	Scene createWorkoutScene = new Scene(createWorkoutLayout, 600, 800);
+	primaryStage.setScene(createWorkoutScene);
+    }
 
     private void showUpdateWorkoutPlanPage() {
-	    Label title = new Label("Update Workout Plan");
-	    title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-	    Button backButton = new Button("Return to Dashboard");
-	    backButton.setOnAction(e -> showTrainerPage());
+	Label title = new Label("Update Workout Plan");
+	title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+	Button backButton = new Button("Return to Dashboard");
+	backButton.setOnAction(e -> showTrainerPage());
 
-	    Label fitnessGoalLabel = new Label("Fitness Goal");
-	    ComboBox<String> fitnessGoal = new ComboBox<>();
-	    fitnessGoal.getItems().addAll("Weight Loss", "Strength Training", "Balanced");
+	Label fitnessGoalLabel = new Label("Fitness Goal");
+	ComboBox<String> fitnessGoal = new ComboBox<>();
+	fitnessGoal.getItems().addAll("Weight Loss", "Strength Training", "Balanced");
 
-	    GridPane workoutGrid = new GridPane();
-	    workoutGrid.setHgap(10);
-	    workoutGrid.setVgap(10);
-	    workoutGrid.setAlignment(Pos.CENTER);
+	GridPane workoutGrid = new GridPane();
+	workoutGrid.setHgap(10);
+	workoutGrid.setVgap(10);
+	workoutGrid.setAlignment(Pos.CENTER);
 
-	    // Adding headers
-	    workoutGrid.add(new Label("Exercise"), 0, 0);
-	    workoutGrid.add(new Label("No. of Reps"), 1, 0);
-	    workoutGrid.add(new Label("No. of Sets"), 2, 0);
+	// Adding headers
+	workoutGrid.add(new Label("Exercise"), 0, 0);
+	workoutGrid.add(new Label("No. of Reps"), 1, 0);
+	workoutGrid.add(new Label("No. of Sets"), 2, 0);
 
-	    for (int i = 1; i <= 5; i++) {
-	        workoutGrid.add(new TextField(), 0, i);
-	        workoutGrid.add(new TextField(), 1, i);
-	        workoutGrid.add(new TextField(), 2, i);
-	    }
-
-	    Button updatePlanButton = new Button("Update Plan");
-
-	    VBox updateWorkoutLayout = new VBox(10, backButton, title, fitnessGoalLabel, fitnessGoal, workoutGrid, updatePlanButton);
-	    updateWorkoutLayout.setAlignment(Pos.CENTER);
-	    updateWorkoutLayout.setPadding(new Insets(20));
-
-	    Scene updateWorkoutScene = new Scene(updateWorkoutLayout, 600, 800);
-	    primaryStage.setScene(updateWorkoutScene);
+	for (int i = 1; i <= 5; i++) {
+	    workoutGrid.add(new TextField(), 0, i);
+	    workoutGrid.add(new TextField(), 1, i);
+	    workoutGrid.add(new TextField(), 2, i);
 	}
+
+	Button updatePlanButton = new Button("Update Plan");
+
+	VBox updateWorkoutLayout = new VBox(10, backButton, title, fitnessGoalLabel, fitnessGoal, workoutGrid, updatePlanButton);
+	updateWorkoutLayout.setAlignment(Pos.CENTER);
+	updateWorkoutLayout.setPadding(new Insets(20));
+
+	Scene updateWorkoutScene = new Scene(updateWorkoutLayout, 600, 800);
+	primaryStage.setScene(updateWorkoutScene);
+    }
 
     private void showUserProgressPage() {
 	Label title = new Label("User Progress");
@@ -268,19 +268,28 @@ public class FitnessTrackingApp extends Application {
 	Button backButton = new Button("Return to Dashboard");
 	backButton.setOnAction(e -> showTrainerPage());
 
-	Label subscribersLabel = new Label("Subscribers");
 	GridPane progressGrid = new GridPane();
 	progressGrid.setHgap(10);
 	progressGrid.setVgap(10);
 	progressGrid.setAlignment(Pos.CENTER);
 
-	for (int i = 0; i < 5; i++) {
+	Label subscribersLabel = new Label("Subscribers");
+	Label typeLabel = new Label("Type of Workout");
+	Label timesCompletedLabel = new Label("Number of times completed");
+
+	// Adding headers
+	progressGrid.add(subscribersLabel, 0, 0);
+	progressGrid.add(typeLabel, 1, 0);
+	progressGrid.add(timesCompletedLabel, 2, 0);
+
+
+	for (int i = 1; i < 5; i++) {
 	    progressGrid.add(new Label("Username"), 0, i);
 	    progressGrid.add(new TextField("Balanced"), 1, i);
 	    progressGrid.add(new TextField(), 2, i);
 	}
 
-	VBox userProgressLayout = new VBox(10, backButton, title, subscribersLabel, progressGrid);
+	VBox userProgressLayout = new VBox(10, backButton, title, progressGrid);
 	userProgressLayout.setAlignment(Pos.CENTER);
 	userProgressLayout.setPadding(new Insets(20));
 
