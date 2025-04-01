@@ -1,3 +1,5 @@
+
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -349,6 +351,7 @@ public class FitnessTrackingApp extends Application {
     }
 
     public static void main(String[] args) {
+	System.out.println("Testing");
 	launch(args);
     }
 }
