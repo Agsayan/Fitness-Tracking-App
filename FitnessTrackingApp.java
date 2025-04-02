@@ -308,9 +308,11 @@ public class FitnessTrackingApp extends Application {
 
 	    if (password.isEmpty() || confirmPassword.isEmpty()) {
 		errorLabel.setText("Fields cannot be empty.");
-	    } else if (!password.equals(confirmPassword)) {
+	    } 
+	    else if (!password.equals(confirmPassword)) {
 		errorLabel.setText("Passwords do not match.");
-	    } else {
+	    } 
+	    else {
 		errorLabel.setText("");
 		showTrainerPage(); // Proceed with updating logic here
 	    }
