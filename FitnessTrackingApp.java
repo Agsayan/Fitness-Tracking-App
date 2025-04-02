@@ -184,8 +184,9 @@ public class FitnessTrackingApp extends Application {
     private void showCreateWorkoutPlanPage() {
 	Label title = new Label("Create Workout Plan");
 	title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-	Button backButton = new Button("Return to Dashboard");
-	backButton.setOnAction(e -> showTrainerPage());
+
+	StackPane backButton = createBackButton();
+	backButton.setOnMouseClicked(e -> showTrainerPage());
 
 	Label fitnessGoalLabel = new Label("Fitness Goal");
 	ComboBox<String> fitnessGoal = new ComboBox<>();
@@ -220,8 +221,9 @@ public class FitnessTrackingApp extends Application {
     private void showUpdateWorkoutPlanPage() {
 	Label title = new Label("Update Workout Plan");
 	title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-	Button backButton = new Button("Return to Dashboard");
-	backButton.setOnAction(e -> showTrainerPage());
+
+	StackPane backButton = createBackButton();
+	backButton.setOnMouseClicked(e -> showTrainerPage());
 
 	Label fitnessGoalLabel = new Label("Fitness Goal");
 	ComboBox<String> fitnessGoal = new ComboBox<>();
@@ -256,8 +258,9 @@ public class FitnessTrackingApp extends Application {
     private void showUserProgressPage() {
 	Label title = new Label("User Progress");
 	title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-	Button backButton = new Button("Return to Dashboard");
-	backButton.setOnAction(e -> showTrainerPage());
+
+	StackPane backButton = createBackButton();
+	backButton.setOnMouseClicked(e -> showTrainerPage());
 
 	GridPane progressGrid = new GridPane();
 	progressGrid.setHgap(10);
@@ -289,8 +292,9 @@ public class FitnessTrackingApp extends Application {
     private void showProfileManagementTrainerPage() {
 	Label title = new Label("Profile Management");
 	title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-	Button backButton = new Button("Return to Dashboard");
-	backButton.setOnAction(e -> showTrainerPage());
+
+	StackPane backButton = createBackButton();
+	backButton.setOnMouseClicked(e -> showTrainerPage());
 
 	Label passwordLabel = new Label("New Password");
 	PasswordField passwordField = new PasswordField();
@@ -319,7 +323,7 @@ public class FitnessTrackingApp extends Application {
 	});
 
 	Button logoutButton = new Button("Log Out");
-	logoutButton.setOnAction(e -> showHomePage());
+	logoutButton.setOnAction(e -> showTrainerPage());
 
 	VBox profileManagementLayout = new VBox(10, backButton, title, passwordLabel, passwordField, 
 		confirmPasswordLabel, confirmPasswordField, 
@@ -335,7 +339,7 @@ public class FitnessTrackingApp extends Application {
     private VBox createPage(String pageTitle) {
 
 	StackPane backButton = createBackButton();
-	backButton.setOnMouseClicked(e -> showHomePage());
+	backButton.setOnMouseClicked(e -> showTrainerPage());
 
 	// Page title
 	Label pageLabel = new Label(pageTitle);
