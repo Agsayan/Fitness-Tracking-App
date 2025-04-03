@@ -7,6 +7,9 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import java.util.Map;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.util.HashMap;
 import javafx.scene.control.Alert;
 import javafx.application.Application;
@@ -51,16 +54,16 @@ public class FitnessTrackingApp extends Application {
 	    try {
 		String username = usernameField.getText();
 		String password = passwordField.getText();
-		
+
 		LoginDAO loginDAO = new LoginDAO();
 		boolean isValid = loginDAO.validateEnthusiast(username, password);
 		if (isValid) {
 		    current.setCurrentUsername(username);
 		    current.setCurrentPassword(password);
-		    
+
 		    Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		    alert.setTitle("Successful Login");
-		    
+
 		    alert.setHeaderText(null);
 		    alert.setContentText("Welcome " + username);
 		    alert.showAndWait();
@@ -86,10 +89,10 @@ public class FitnessTrackingApp extends Application {
 		LoginDAO loginDAO = new LoginDAO();
 		boolean isValid = loginDAO.validateTrainer(username, password);
 		if (isValid) {
-		    
+
 		    current.setCurrentUsername(username);
 		    current.setCurrentPassword(password);
-		    
+
 		    Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		    alert.setTitle("Successful Login");
 		    alert.setHeaderText(null);
@@ -974,25 +977,42 @@ public class FitnessTrackingApp extends Application {
 	workoutGrid.setVgap(10);
 	workoutGrid.setAlignment(Pos.CENTER);
 
-	// Adding headers
 	workoutGrid.add(new Label("Exercise"), 0, 0);
 	workoutGrid.add(new Label("No. of Reps"), 1, 0);
 	workoutGrid.add(new Label("No. of Sets"), 2, 0);
 
-	for (int i = 1; i <= 5; i++) {
-	    workoutGrid.add(new TextField(), 0, i);
-	    workoutGrid.add(new TextField(), 1, i);
-	    workoutGrid.add(new TextField(), 2, i);
+	TextField[] exerciseFields = new TextField[5];
+	TextField[] repFields = new TextField[5];
+	TextField[] setFields = new TextField[5];
+
+	for (int i = 0; i < 5; i++) {
+	    exerciseFields[i] = new TextField();
+	    repFields[i] = new TextField();
+	    setFields[i] = new TextField();
+	    workoutGrid.add(exerciseFields[i], 0, i + 1);
+	    workoutGrid.add(repFields[i], 1, i + 1);
+	    workoutGrid.add(setFields[i], 2, i + 1);
 	}
 
 	Button createPlanButton = new Button("Create Plan");
+	createPlanButton.setOnAction(e -> {
+	    String goal = fitnessGoal.getValue();
 
-	VBox createWorkoutLayout = new VBox(10, backButton, title, fitnessGoalLabel, fitnessGoal, workoutGrid, createPlanButton);
-	createWorkoutLayout.setAlignment(Pos.CENTER);
-	createWorkoutLayout.setPadding(new Insets(20));
+	    try {
+		if (goal != null) {
+		    LoginDAO loginDAO = new LoginDAO();
+		    loginDAO.insertWorkoutPlan(goal, exerciseFields, repFields, setFields, current.getCurrentUsername(), current.getCurrentPassword());
+		}
+	    } catch (Exception ex) {
+		ex.printStackTrace();
+	    }
+	});
 
-	Scene createWorkoutScene = new Scene(createWorkoutLayout, 600, 800);
-	primaryStage.setScene(createWorkoutScene);
+	VBox layout = new VBox(10, backButton, title, fitnessGoalLabel, fitnessGoal, workoutGrid, createPlanButton);
+	layout.setAlignment(Pos.CENTER);
+	layout.setPadding(new Insets(20));
+
+	primaryStage.setScene(new Scene(layout, 600, 800));
     }
 
     private void showUpdateWorkoutPlanPage() {
@@ -1015,20 +1035,52 @@ public class FitnessTrackingApp extends Application {
 	workoutGrid.add(new Label("No. of Reps"), 1, 0);
 	workoutGrid.add(new Label("No. of Sets"), 2, 0);
 
-	for (int i = 1; i <= 5; i++) {
-	    workoutGrid.add(new TextField(), 0, i);
-	    workoutGrid.add(new TextField(), 1, i);
-	    workoutGrid.add(new TextField(), 2, i);
+	TextField[] exerciseFields = new TextField[5];
+	TextField[] repFields = new TextField[5];
+	TextField[] setFields = new TextField[5];
+
+	for (int i = 0; i < 5; i++) {
+	    exerciseFields[i] = new TextField();
+	    repFields[i] = new TextField();
+	    setFields[i] = new TextField();
+	    workoutGrid.add(exerciseFields[i], 0, i + 1);
+	    workoutGrid.add(repFields[i], 1, i + 1);
+	    workoutGrid.add(setFields[i], 2, i + 1);
 	}
 
 	Button updatePlanButton = new Button("Update Plan");
 
-	VBox updateWorkoutLayout = new VBox(10, backButton, title, fitnessGoalLabel, fitnessGoal, workoutGrid, updatePlanButton);
-	updateWorkoutLayout.setAlignment(Pos.CENTER);
-	updateWorkoutLayout.setPadding(new Insets(20));
+	fitnessGoal.setOnAction(e -> {
+	    String goal = fitnessGoal.getValue();
+	    try {
+		if (goal != null) {
+		    LoginDAO loginDAO = new LoginDAO();
+		    loginDAO.loadWorkoutPlan(goal, exerciseFields, repFields, setFields, current.getCurrentUsername(), current.getCurrentPassword());
+		}
+	    } catch (Exception ex) {
+		ex.printStackTrace();
+	    }
 
-	Scene updateWorkoutScene = new Scene(updateWorkoutLayout, 600, 800);
-	primaryStage.setScene(updateWorkoutScene);
+	});
+
+	updatePlanButton.setOnAction(e -> {
+	    String goal = fitnessGoal.getValue();
+
+	    try {
+		if (goal != null) {
+		    LoginDAO loginDAO = new LoginDAO();
+		    loginDAO.updateWorkoutPlan(goal, exerciseFields, repFields, setFields, current.getCurrentUsername(), current.getCurrentPassword());
+		}
+	    } catch (Exception ex) {
+		ex.printStackTrace();
+	    }
+	});
+
+	VBox layout = new VBox(10, backButton, title, fitnessGoalLabel, fitnessGoal, workoutGrid, updatePlanButton);
+	layout.setAlignment(Pos.CENTER);
+	layout.setPadding(new Insets(20));
+
+	primaryStage.setScene(new Scene(layout, 600, 800));
     }
 
     private void showUserProgressPage() {
@@ -1108,9 +1160,9 @@ public class FitnessTrackingApp extends Application {
 	HBox fitnessGoalsLine = new HBox(10, fitnessGoalsLabel, fitnessGoalsBox);
 	fitnessGoalsLine.setAlignment(Pos.CENTER);
 	HBox updateBtnLine = new HBox(10, updateButton);
-        updateBtnLine.setAlignment(Pos.CENTER);
-        HBox logoutBtnLine = new HBox(10, logoutButton);
-        logoutBtnLine.setAlignment(Pos.CENTER);
+	updateBtnLine.setAlignment(Pos.CENTER);
+	HBox logoutBtnLine = new HBox(10, logoutButton);
+	logoutBtnLine.setAlignment(Pos.CENTER);
 
 	try {
 	    LoginDAO loginDAO = new LoginDAO();
@@ -1145,7 +1197,7 @@ public class FitnessTrackingApp extends Application {
 		    errorLabel.setText("Passwords do not match.");
 		} 
 		else {
-		    
+
 		    System.out.println(username);
 		    System.out.println(oldPassword);
 		    System.out.println(confirmPassword);
